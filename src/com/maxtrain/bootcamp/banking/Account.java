@@ -2,9 +2,14 @@ package com.maxtrain.bootcamp.banking;
 
 public class Account {
 
+	//***************** Class Fields
+	
 	private int id = 0;
 	private String description;
 	private double balance = 0;
+	private static int nextId = 1;
+	
+	//***************** Class Methods
 	
 	public void deposit(double amount) throws Exception{
 		checkAmountGTZero(amount);
@@ -34,14 +39,29 @@ public class Account {
 		}
 	}
 	
+	public String toString() {
+		return String.format("%2d | %-15s | %,7.2f%n", getId(), getDescription(), getBalance());
+	}
 	
+	//***************** Constructors 
+	
+	public Account(String description){
+		setId(nextId++);
+		setDescription(description);
+		setBalance(0);		
+	}
+	
+	public Account() {
+		this("New Account");
+	}
+	
+	//***************** Getters and Setters
 	
 	public int getId() {
 		return id;
 	}
-	private void setId(int id) throws Exception {
-		if(id<0)
-			throw new Exception("Id cannot be negative!!");
+	private void setId(int id) {
+	
 		this.id = id;
 	}
 	public String getDescription() {
@@ -53,9 +73,11 @@ public class Account {
 	public double getBalance() {
 		return balance;
 	}
-	private void setBalance(double balance) {
+	protected void setBalance(double balance) {
 		this.balance = balance;
 	}
-	
+	public String getBalanceFormatted() {
+		return String.format("%,7.2f",  getBalance());
+	}
 	
 }
