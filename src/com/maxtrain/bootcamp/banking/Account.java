@@ -18,8 +18,6 @@ public class Account {
 	}
 	
 	public void transfer(double amount, Account toAccount) throws Exception{
-		checkAmountGTZero(amount);
-		checkInsufficientFunds(amount);
 		setBalance (getBalance() - amount);
 		toAccount.deposit(amount);
 	}
@@ -55,7 +53,7 @@ public class Account {
 	public double getBalance() {
 		return balance;
 	}
-	public void setBalance(double balance) {
+	private void setBalance(double balance) {
 		this.balance = balance;
 	}
 	
